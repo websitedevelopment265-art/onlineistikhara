@@ -12,12 +12,14 @@
       theme: {
         extend: {
           colors: {
-            ivory: '#FCFBF7',    // Royal Light Background
-            charcoal: '#1A1A1A', // Dark text for contrast
+            ivory: '#FCFBF7',    
+            charcoal: '#0D0D0D', 
             gold: '#c5a059',
             goldLight: '#e9d5a1',
             forest: '#033025',   
             emerald: '#064e3b',
+            royal: '#0b1d3d',
+            amber: '#8b5e1a',
           },
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
@@ -26,20 +28,42 @@
           },
           animation: {
             'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            'spin-slow': 'spin 8s linear infinite',
+            'shimmer': 'shimmer 3s infinite linear',
+            'float': 'float 6s ease-in-out infinite',
+            'sweep': 'sweep 5s infinite',
+            'godrays': 'godrays 20s linear infinite',
+            'swing': 'swing 4s ease-in-out infinite',
+          },
+          keyframes: {
+            shimmer: {
+              '0%': { transform: 'translateX(-100%)' },
+              '100%': { transform: 'translateX(100%)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-30px)' },
+            },
+            sweep: {
+              '0%': { backgroundPosition: '-200% center' },
+              '100%': { backgroundPosition: '200% center' },
+            },
+            godrays: {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' },
+            },
+            swing: {
+              '0%, 100%': { transform: 'rotate(-5deg)' },
+              '50%': { transform: 'rotate(5deg)' },
+            }
           }
         }
       }
     }
   </script>
   <style>
-    :root {
-      --gold-rgb: 197, 160, 89;
-    }
-
     body {
-      background-color: #FCFBF7;
-      color: #1A1A1A;
+      background-color: #0D0D0D;
+      color: #FCFBF7;
       margin: 0;
       overflow-x: hidden;
       cursor: none; 
@@ -50,86 +74,63 @@
       scroll-behavior: smooth;
     }
 
-    /* Light Glassmorphism */
-    .glass {
-      background: rgba(255, 255, 255, 0.4); 
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(197, 160, 89, 0.25);
-      box-shadow: 0 8px 32px 0 rgba(197, 160, 89, 0.05);
-    }
+    /* Glow Utilities */
+    .glow-emerald { filter: drop-shadow(0 0 15px rgba(6, 78, 59, 0.6)); }
+    .glow-gold { filter: drop-shadow(0 0 25px rgba(197, 160, 89, 0.7)); }
+    .glow-royal { filter: drop-shadow(0 0 15px rgba(11, 29, 61, 0.6)); }
+    .glow-amber { filter: drop-shadow(0 0 15px rgba(139, 94, 26, 0.6)); }
+
+    /* Themed Glass Cards */
+    .glass-emerald { background: rgba(3, 48, 37, 0.3); border: 1px solid rgba(6, 78, 59, 0.4); }
+    .glass-gold { background: rgba(197, 160, 89, 0.1); border: 1px solid rgba(197, 160, 89, 0.4); }
+    .glass-royal { background: rgba(11, 29, 61, 0.3); border: 1px solid rgba(11, 29, 61, 0.4); }
+    .glass-amber { background: rgba(139, 94, 26, 0.2); border: 1px solid rgba(139, 94, 26, 0.4); }
 
     .gold-gradient-text {
-      background: linear-gradient(135deg, #c5a059 0%, #a67c00 100%);
+      background: linear-gradient(135deg, #c5a059 0%, #fff 50%, #c5a059 100%);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: sweep 4s linear infinite;
     }
 
-    /* Mirror Reflection for UI elements */
-    .mirror-ui {
-      position: relative;
-    }
-    .mirror-ui::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      height: 40px;
-      background: linear-gradient(to bottom, rgba(197, 160, 89, 0.1), transparent);
-      opacity: 0.2;
-      transform: scaleY(-0.5) skewX(2deg);
-      filter: blur(8px);
-      pointer-events: none;
-    }
-
-    /* Specialized CTA Button Mirror Effect */
     .mirror-button {
       position: relative;
+      overflow: hidden;
+      transition: all 0.5s ease;
     }
-    .mirror-button::after {
-      content: "";
-      position: absolute;
-      top: 115%;
-      left: 10%;
-      right: 10%;
-      height: 50%;
-      background: linear-gradient(to bottom, #c5a059, transparent);
-      opacity: 0.15;
-      transform: scaleY(-0.8) skewX(2deg);
-      filter: blur(4px);
-      border-radius: inherit;
-      pointer-events: none;
-      transition: all 0.3s ease;
+    
+    .mirror-button:hover {
+      box-shadow: 0 0 40px currentColor;
+      transform: scale(1.05);
     }
-    .mirror-button:hover::after {
-      opacity: 0.3;
-      filter: blur(2px);
+
+    .god-rays {
+      background: conic-gradient(
+        from 0deg at 50% 50%,
+        transparent 0%,
+        rgba(197, 160, 89, 0.05) 15%,
+        transparent 30%,
+        rgba(197, 160, 89, 0.05) 45%,
+        transparent 60%,
+        rgba(197, 160, 89, 0.05) 75%,
+        transparent 90%,
+        transparent 100%
+      );
+      filter: blur(40px);
     }
 
     .parallax-pattern {
-      background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M150 0l15 45 45 15-45 15-15 45-15-45-45-15 45-15 15-45z' fill='%23c5a059' fill-opacity='0.03'/%3E%3C/svg%3E");
-      background-repeat: repeat;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0L60 40L100 50L60 60L50 100L40 60L0 50L40 40Z' fill='%23c5a059' fill-opacity='0.05'/%3E%3C/svg%3E");
       position: fixed;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
+      inset: 0;
       pointer-events: none;
-      z-index: -1;
+      z-index: 1;
     }
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #FCFBF7;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #c5a059;
-      border-radius: 10px;
-    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0D0D0D; }
+    ::-webkit-scrollbar-thumb { background: #c5a059; border-radius: 10px; }
 
     @media (max-width: 1024px) {
       body { cursor: auto; }
@@ -148,7 +149,7 @@
 }
 </script>
 </head>
-<body class="arabesque-overlay">
+<body class="bg-charcoal text-ivory">
   <div id="root"></div>
 </body>
 </html>

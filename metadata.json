@@ -1,0 +1,8 @@
+{
+  "name": "onlineistikhara",
+  "description": "A high-end, spiritual platform featuring glassmorphism, cinematic animations, and interactive Istikhara services with an elegant Islamic aesthetic.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}

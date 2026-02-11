@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nur-ul-Huda | Sacred Spiritual Excellence</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ivory: '#FCFBF7',    // Royal Light Background
+            charcoal: '#1A1A1A', // Dark text for contrast
+            gold: '#c5a059',
+            goldLight: '#e9d5a1',
+            forest: '#033025',   
+            emerald: '#064e3b',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Amiri', 'serif'],
+            kufi: ['Reem Kufi', 'sans-serif'],
+          },
+          animation: {
+            'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'spin-slow': 'spin 8s linear infinite',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --gold-rgb: 197, 160, 89;
+    }
+
+    body {
+      background-color: #FCFBF7;
+      color: #1A1A1A;
+      margin: 0;
+      overflow-x: hidden;
+      cursor: none; 
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Light Glassmorphism */
+    .glass {
+      background: rgba(255, 255, 255, 0.4); 
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(197, 160, 89, 0.25);
+      box-shadow: 0 8px 32px 0 rgba(197, 160, 89, 0.05);
+    }
+
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #c5a059 0%, #a67c00 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Mirror Reflection for UI elements */
+    .mirror-ui {
+      position: relative;
+    }
+    .mirror-ui::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(197, 160, 89, 0.1), transparent);
+      opacity: 0.2;
+      transform: scaleY(-0.5) skewX(2deg);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    /* Specialized CTA Button Mirror Effect */
+    .mirror-button {
+      position: relative;
+    }
+    .mirror-button::after {
+      content: "";
+      position: absolute;
+      top: 115%;
+      left: 10%;
+      right: 10%;
+      height: 50%;
+      background: linear-gradient(to bottom, #c5a059, transparent);
+      opacity: 0.15;
+      transform: scaleY(-0.8) skewX(2deg);
+      filter: blur(4px);
+      border-radius: inherit;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    .mirror-button:hover::after {
+      opacity: 0.3;
+      filter: blur(2px);
+    }
+
+    .parallax-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M150 0l15 45 45 15-45 15-15 45-15-45-45-15 45-15 15-45z' fill='%23c5a059' fill-opacity='0.03'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FCFBF7;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c5a059;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 1024px) {
+      body { cursor: auto; }
+      .custom-cursor { display: none; }
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "framer-motion": "https://esm.sh/framer-motion@^12.34.0"
+  }
+}
+</script>
+</head>
+<body class="arabesque-overlay">
+  <div id="root"></div>
+</body>
+</html>

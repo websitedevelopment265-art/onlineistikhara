@@ -4,9 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   MessageCircle, 
   Sparkles, 
-  Instagram, 
-  Facebook, 
-  Twitter,
   ShieldCheck,
   Check,
   ArrowRight,
@@ -16,7 +13,12 @@ import {
   Sunrise,
   ArrowUp,
   Lamp,
-  ChevronDown
+  ChevronDown,
+  Mail,
+  Instagram,
+  Facebook,
+  Twitter,
+  Quote
 } from 'lucide-react';
 import { NAV_ITEMS } from './constants';
 import ParticleBackground from './components/ParticleBackground';
@@ -34,8 +36,8 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2
+      staggerChildren: 0.1,
+      delayChildren: 0.1
     }
   }
 };
@@ -110,20 +112,20 @@ const FloatingLantern: React.FC<{ className?: string; delay?: number }> = ({ cla
 );
 
 const SectionHeader: React.FC<{ title: string; urduTitle: string; icon: any; colorClass: string }> = ({ title, urduTitle, icon: Icon, colorClass }) => (
-  <div className="text-center mb-20 relative">
+  <div className="text-center mb-16 relative">
     <motion.div 
       variants={itemVariants}
-      className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8 bg-black/40 border border-current ${colorClass} shadow-[0_0_40px_currentColor]`}
+      className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 bg-black/40 border border-current ${colorClass} shadow-[0_0_30px_currentColor]`}
     >
-      <Icon className="w-10 h-10" />
+      <Icon className="w-8 h-8" />
     </motion.div>
-    <motion.h2 variants={itemVariants} className="text-4xl md:text-7xl font-serif font-bold text-white mb-4 tracking-tight">
-      {title} <span className="italic gold-gradient-text drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">{urduTitle}</span>
+    <motion.h2 variants={itemVariants} className="text-3xl md:text-6xl font-serif font-bold text-white mb-4 tracking-tight premium-heading">
+      {title} <span className="italic gold-gradient-text drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] arabic-font" dir="rtl">{urduTitle}</span>
     </motion.h2>
     <motion.div 
       initial={{ width: 0 }}
-      whileInView={{ width: 100 }}
-      className="h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-6"
+      whileInView={{ width: 80 }}
+      className="h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-4"
     />
   </div>
 );
@@ -132,51 +134,52 @@ const DetailBlock: React.FC<{
   id: string; 
   title: string; 
   content: string; 
-  benefits: string[]; 
-  theme: 'emerald' | 'gold' | 'royal' | 'amber' 
-}> = ({ id, title, content, benefits, theme }) => {
+  benefits?: string[]; 
+  theme: 'emerald' | 'gold' | 'royal' | 'amber';
+  isCompact?: boolean;
+}> = ({ id, title, content, benefits, theme, isCompact = false }) => {
   const themes = {
-    emerald: { glass: 'glass-emerald', glow: 'hover:shadow-[0_0_60px_rgba(6,78,59,0.3)]', text: 'text-emerald-400' },
-    gold: { glass: 'glass-gold', glow: 'hover:shadow-[0_0_60px_rgba(197,160,89,0.3)]', text: 'text-gold' },
-    royal: { glass: 'glass-royal', glow: 'hover:shadow-[0_0_60px_rgba(11,29,61,0.3)]', text: 'text-blue-400' },
-    amber: { glass: 'glass-amber', glow: 'hover:shadow-[0_0_60px_rgba(139,94,26,0.3)]', text: 'text-amber-400' }
+    emerald: { glass: 'glass-emerald', glow: 'hover:shadow-[0_0_40px_rgba(6,78,59,0.3)]', text: 'text-emerald-400' },
+    gold: { glass: 'glass-gold', glow: 'hover:shadow-[0_0_40px_rgba(197,160,89,0.3)]', text: 'text-gold' },
+    royal: { glass: 'glass-royal', glow: 'hover:shadow-[0_0_40px_rgba(11,29,61,0.3)]', text: 'text-blue-400' },
+    amber: { glass: 'glass-amber', glow: 'hover:shadow-[0_0_40px_rgba(139, 94, 26, 0.3)]', text: 'text-amber-400' }
   };
   const current = themes[theme];
 
   return (
-    <div className="relative group mb-12">
+    <div className="relative group">
       <motion.div 
         id={id.replace('#', '')} 
         variants={itemVariants}
-        whileHover={{ y: -10, scale: 1.01 }}
-        className={`scroll-mt-48 p-12 rounded-[3rem] backdrop-blur-xl border-2 transition-all duration-700 relative overflow-hidden ${current.glass} ${current.glow}`}
+        whileHover={{ y: -8, scale: 1.02 }}
+        className={`scroll-mt-48 p-8 rounded-[2rem] backdrop-blur-xl border-2 transition-all duration-700 relative overflow-hidden flex flex-col h-full ${current.glass} ${current.glow}`}
       >
-        <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/5 blur-[60px] group-hover:bg-white/10 transition-colors" />
+        <div className="absolute -top-10 -right-10 w-24 h-24 bg-white/5 blur-[40px] group-hover:bg-white/10 transition-colors" />
         
-        <h4 className={`text-4xl font-serif font-bold mb-6 transition-colors ${current.text}`}>{title}</h4>
-        <p className="text-ivory/80 mb-8 leading-relaxed italic text-lg">{content}</p>
+        <h4 className={`text-2xl font-serif font-bold mb-4 transition-colors ${current.text} premium-heading`}>{title}</h4>
+        <p className="text-ivory/80 mb-6 leading-relaxed urdu-font text-lg md:text-xl" dir="rtl">{content}</p>
         
-        <div className="grid md:grid-cols-1 gap-6 mb-10">
-          <div className="space-y-4">
+        {benefits && (
+          <div className="space-y-3 mb-8 mt-auto">
             {benefits.map((b, i) => (
-              <div key={i} className="flex items-center space-x-4">
-                <div className={`w-6 h-6 rounded-full bg-white/10 flex items-center justify-center ${current.text}`}>
-                  <Check className="w-3 h-3" />
+              <div key={i} className="flex items-center space-x-3">
+                <div className={`w-4 h-4 rounded-full bg-white/10 flex items-center justify-center ${current.text}`}>
+                  <Check className="w-2 h-2" />
                 </div>
-                <span className="text-sm font-bold uppercase tracking-widest text-ivory/90">{b}</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-ivory/80">{b}</span>
               </div>
             ))}
           </div>
-        </div>
+        )}
 
-        <button onClick={() => window.open('https://wa.me/923057615767', '_blank')} className={`flex items-center space-x-4 font-black text-[10px] uppercase tracking-[0.4em] transition-all hover:translate-x-3 ${current.text}`}>
-          <span>Request Sacred Guidance</span>
-          <ArrowRight className="w-4 h-4" />
+        <button onClick={() => window.open('https://wa.me/923057615767', '_blank')} className={`mt-auto flex items-center space-x-3 font-black text-[9px] uppercase tracking-[0.3em] transition-all hover:translate-x-2 ${current.text}`}>
+          <span>Request Guidance</span>
+          <ArrowRight className="w-3 h-3" />
         </button>
       </motion.div>
       {/* Mirror Reflection */}
-      <div className="reflection-mask h-48 w-full relative mt-[-10px] opacity-10 pointer-events-none group-hover:opacity-20 transition-opacity">
-          <div className={`w-full h-full rounded-[3rem] ${current.glass}`} />
+      <div className="reflection-mask h-32 w-full relative mt-[-5px] opacity-10 pointer-events-none group-hover:opacity-20 transition-opacity">
+          <div className={`w-full h-full rounded-[2rem] ${current.glass}`} />
       </div>
     </div>
   );
@@ -224,7 +227,7 @@ const App: React.FC = () => {
           <div className="relative z-10 flex flex-col items-center text-center">
             <BismillahSVG />
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 1 }}>
-              <h1 className="text-gold font-serif font-bold text-6xl md:text-[9rem] leading-none mb-6 drop-shadow-[0_0_60px_rgba(197,160,89,0.9)] text-center">
+              <h1 className="text-gold arabic-font font-bold text-6xl md:text-[9rem] leading-none mb-6 drop-shadow-[0_0_60px_rgba(197,160,89,0.9)] text-center premium-heading" dir="rtl">
                 بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
               </h1>
               <h2 className="text-white font-sans font-black text-2xl tracking-[1.2em] mb-12 uppercase opacity-70">BISMILLAH</h2>
@@ -248,7 +251,7 @@ const App: React.FC = () => {
           <div className="fixed top-0 left-0 right-0 z-[110]">
             <div className="bg-forest text-white py-2 overflow-hidden border-b border-gold/30 relative z-50">
               <div className="flex items-center justify-center space-x-6">
-                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-goldLight drop-shadow-[0_0_8px_rgba(233,213,161,0.5)]">
+                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-goldLight drop-shadow-[0_0_8px_rgba(233,213,161,0.5)] arabic-font" dir="rtl">
                   بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
                 </span>
               </div>
@@ -259,7 +262,7 @@ const App: React.FC = () => {
                   <div className="w-12 h-12 rounded-full bg-gold flex items-center justify-center shadow-[0_0_25px_rgba(197,160,89,0.6)] group-hover:scale-110 transition-transform">
                     <span className="text-charcoal font-black text-xl">N</span>
                   </div>
-                  <span className="text-white font-serif text-xl font-bold tracking-tight gold-gradient-text uppercase">NUR-UL-HUDA</span>
+                  <span className="text-white font-serif text-xl font-bold tracking-tight gold-gradient-text uppercase premium-heading">NUR-UL-HUDA</span>
                 </a>
                 
                 <div className="hidden lg:flex items-center space-x-8">
@@ -304,7 +307,7 @@ const App: React.FC = () => {
                       )}
                     </div>
                   ))}
-                  <button onClick={() => window.open('https://wa.me/923057615767', '_blank')} className="bg-gold text-charcoal px-8 py-4 rounded-2xl text-[9px] font-black uppercase tracking-widest mirror-button">CONSULTATION</button>
+                  <button onClick={() => window.open('https://wa.me/923057615767', '_blank')} className="bg-gold text-charcoal px-8 py-4 rounded-2xl text-[9px] font-black uppercase tracking-widest mirror-button shadow-[0_5px_15px_rgba(197,160,89,0.3)]">CONSULTATION</button>
                 </div>
               </div>
             </nav>
@@ -320,155 +323,109 @@ const App: React.FC = () => {
               </motion.div>
               <div className="relative inline-block mb-10">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 1 }} className="flex flex-col items-center">
-                  <span className="text-gold font-serif text-6xl md:text-9xl font-bold tracking-widest leading-none drop-shadow-[0_0_40px_rgba(197,160,89,0.7)] animate-float">نور الہدیٰ</span>
+                  <span className="text-gold arabic-font text-6xl md:text-9xl font-bold tracking-widest leading-none drop-shadow-[0_0_40px_rgba(197,160,89,0.7)] animate-float premium-heading" dir="rtl">نور الہدیٰ</span>
                   <div className="w-24 h-1 bg-gold/40 my-10 divine-glow" />
                 </motion.div>
-                <motion.h1 initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, duration: 1.2 }} className="text-6xl md:text-[10rem] font-serif font-bold text-white leading-[0.85] tracking-tight drop-shadow-[0_10px_60px_rgba(0,0,0,0.9)]">
-                  روحانی <br />
-                  <span className="gold-gradient-text italic drop-shadow-[0_0_35px_rgba(255,255,255,0.4)]">مرکزِ ہدایت</span>
+                <motion.h1 initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, duration: 1.2 }} className="text-6xl md:text-[10rem] font-serif font-bold text-white leading-[0.85] tracking-tight drop-shadow-[0_10px_60px_rgba(0,0,0,0.9)] premium-heading">
+                  <span className="urdu-font" dir="rtl">روحانی</span> <br />
+                  <span className="gold-gradient-text italic drop-shadow-[0_0_35px_rgba(255,255,255,0.4)] urdu-font" dir="rtl">مرکزِ ہدایت</span>
                 </motion.h1>
               </div>
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 0.8 }} transition={{ delay: 2, duration: 1 }} className="text-ivory text-lg md:text-2xl font-serif italic mb-16 tracking-wide max-w-4xl mx-auto leading-relaxed">
-                "قرآنِ پاک کی نورانی روشنی میں، ہم آپ کے روحانی سفر اور دلی سکون کی منزل کو روشن کرتے ہیں۔"
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 0.8 }} transition={{ delay: 2, duration: 1 }} className="text-ivory text-xl md:text-3xl urdu-font mb-16 tracking-wide max-w-4xl mx-auto leading-relaxed" dir="rtl">
+                "قرآنِ پاک ki noorani roshni mein, hum aap ke roohani safar aur dili sukoon ki manzil ko roshan karte hain."
               </motion.p>
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.5, duration: 1 }} className="flex flex-col sm:flex-row items-center justify-center gap-8">
-                <a href="#istikhara" onClick={(e) => scrollToId(e, '#istikhara')} className="px-12 py-6 bg-gold text-charcoal rounded-[1.5rem] font-black uppercase tracking-[0.4em] shadow-[0_0_30px_rgba(197,160,89,0.4)] text-[10px] mirror-button">
-                  روحانی استخارہ
+                <a href="#portals" onClick={(e) => scrollToId(e, '#portals')} className="px-12 py-6 bg-gold text-charcoal rounded-[1.5rem] font-black uppercase tracking-[0.4em] shadow-[0_0_30px_rgba(197,160,89,0.4)] text-[10px] mirror-button">
+                   خدماتِ روحانی
                 </a>
-                <a href="#about" onClick={(e) => scrollToId(e, '#about')} className="px-12 py-6 bg-white/5 backdrop-blur-2xl border border-white/20 text-white rounded-[1.5rem] font-black uppercase tracking-[0.4em] text-[10px] mirror-button">
-                  ہمارا مشن
+                <a href="#istikhara" onClick={(e) => scrollToId(e, '#istikhara')} className="px-12 py-6 bg-white/5 backdrop-blur-2xl border border-white/20 text-white rounded-[1.5rem] font-black uppercase tracking-[0.4em] text-[10px] mirror-button">
+                   آن لائن استخارہ
                 </a>
               </motion.div>
             </div>
           </section>
 
-          {/* DYNAMIC SECTIONS */}
-          <div className="container mx-auto px-8 max-w-6xl space-y-60 pb-60">
+          {/* MAIN SERVICES GRID: 4 COLUMN */}
+          <motion.section 
+            id="portals" 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="py-24 relative z-10 scroll-mt-32"
+          >
+            <div className="container mx-auto px-8 max-w-7xl">
+              <SectionHeader title="Sacred" urduTitle="Portals" icon={Sparkles} colorClass="text-gold" />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <DetailBlock theme="amber" id="#pasand" title="Pasand ki Shadi" content="Allah ki madad se rishton ki rukawaton ko khatam karein. Hum Quran-o-Sunnah ke mutabiq aapki pasand ki shadi mein anay wali mushkilat ka hal nikaalte hain." benefits={['Rishta Success', 'Family Consent', 'Divine Barakah']} />
+                <DetailBlock theme="gold" id="#manpasand" title="Manpasand Shadi" content="Toote hue rishton ko jorne aur na-chaqi door karne ke liye roohani rehnumai aur sabr. Healing emotional wounds." benefits={['Love Bonding', 'Heart Opening', 'Halal Union']} />
+                <DetailBlock theme="emerald" id="#shifa" title="Roohani Shifa" content="Quran-o-Sunnah ki roshni mein zehni sukoon aur har qism ki jismani o roohani bimariyon ka ilaj. Finding cure in the Almighty." benefits={['Mental Peace', 'Physical Healing', 'Soul Cleansing']} />
+                <DetailBlock theme="royal" id="#decisions" title="Istikhara" content="Karobar, safar, aur naukri jaise zindagi ke ahem faislon mein sahi rasta chunne ke liye Allah ki hidayat." benefits={['Career Guidance', 'Travel Safety', 'Financial Barakah']} />
+              </div>
+            </div>
+          </motion.section>
+
+          {/* DYNAMIC SECTIONS: ALL EXPANDED TO 4 BOXES */}
+          <div className="container mx-auto px-8 max-w-7xl space-y-60 pb-60">
             {/* About Section */}
-            <motion.section 
-              id="about" 
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="scroll-mt-32"
-            >
+            <motion.section id="about" variants={containerVariants} initial="hidden" whileInView="visible" className="scroll-mt-32">
               <SectionHeader title="Our Sacred" urduTitle="Legacy" icon={ShieldCheck} colorClass="text-emerald-400" />
               <div className="grid md:grid-cols-2 gap-24 items-center">
                 <motion.div variants={itemVariants} className="glass-emerald p-14 rounded-[3rem] border-2 shadow-2xl relative">
-                   <p className="text-ivory/90 text-2xl font-serif italic leading-relaxed">
+                   <p className="text-ivory/90 text-2xl urdu-font leading-relaxed" dir="rtl">
                     "A beacon of light founded on Quran and Sunnah. We hold your trust in the highest sanctity and provide authentic roohani solutions for every walk of life."
                   </p>
                 </motion.div>
                 <motion.div variants={itemVariants} className="space-y-8">
-                   <h3 className="text-gold text-3xl font-serif">Mission & Values</h3>
-                   <p className="text-ivory/70 text-lg leading-relaxed font-serif">Humara mission andheron se nikal kar dilon ko sukoon aur hidayat ki taraf le jana hai. Decades of spiritual experience combined with traditional wisdom.</p>
+                   <h3 className="text-gold text-3xl font-serif premium-heading">Mission & Values</h3>
+                   <p className="text-ivory/70 text-lg leading-relaxed urdu-font" dir="rtl">Humara mission andheron se nikal kar dilon ko sukoon aur hidayat ki taraf le jana hai. Decades of spiritual experience combined with traditional wisdom.</p>
                    <ul className="space-y-4">
                      <li className="flex items-center space-x-3 text-ivory/60 text-sm"><Check className="text-gold" size={16}/> <span>Privacy & Trust Guaranteed</span></li>
                      <li className="flex items-center space-x-3 text-ivory/60 text-sm"><Check className="text-gold" size={16}/> <span>Rooted in Quran & Sunnah</span></li>
-                     <li className="flex items-center space-x-3 text-ivory/60 text-sm"><Check className="text-gold" size={16}/> <span>Global Reach for Ummah</span></li>
                    </ul>
                 </motion.div>
               </div>
             </motion.section>
 
-            {/* Content for Marriage */}
-            <motion.section 
-              id="marriage" 
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="scroll-mt-32"
-            >
+            {/* Marriage Section: 4 BOXES */}
+            <motion.section id="marriage" variants={containerVariants} initial="hidden" whileInView="visible" className="scroll-mt-32">
               <SectionHeader title="Love &" urduTitle="Marriage" icon={Heart} colorClass="text-amber-500" />
-              <div className="grid md:grid-cols-2 gap-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {NAV_ITEMS.find(n => n.label === 'Love & Marriage')?.children?.map((child, i) => (
-                  <DetailBlock 
-                    key={i}
-                    theme={i % 2 === 0 ? 'amber' : 'gold'}
-                    id={child.href}
-                    title={child.label}
-                    content={child.description}
-                    benefits={child.benefits}
-                  />
+                  <DetailBlock key={i} theme={i % 2 === 0 ? 'amber' : 'gold'} id={child.href} title={child.label} content={child.description} benefits={child.benefits} />
                 ))}
               </div>
             </motion.section>
 
-            {/* Content for Family */}
-            <motion.section 
-              id="family" 
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="scroll-mt-32"
-            >
-              <SectionHeader title="The Family" urduTitle="Sanctuary" icon={Home} colorClass="text-blue-400" />
-              <div className="grid md:grid-cols-2 gap-10">
+            {/* Family Section: 4 BOXES */}
+            <motion.section id="family" variants={containerVariants} initial="hidden" whileInView="visible" className="scroll-mt-32">
+              <SectionHeader title="Family" urduTitle="Harmony" icon={Home} colorClass="text-blue-400" />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {NAV_ITEMS.find(n => n.label === 'Family Problems')?.children?.map((child, i) => (
-                  <DetailBlock 
-                    key={i}
-                    theme={i % 2 === 0 ? 'royal' : 'emerald'}
-                    id={child.href}
-                    title={child.label}
-                    content={child.description}
-                    benefits={child.benefits}
-                  />
+                  <DetailBlock key={i} theme={i % 2 === 0 ? 'royal' : 'emerald'} id={child.href} title={child.label} content={child.description} benefits={child.benefits} />
                 ))}
               </div>
             </motion.section>
 
-            {/* Content for Istikhara */}
-            <motion.section 
-              id="istikhara" 
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="scroll-mt-32"
-            >
+            {/* Istikhara Section: 4 BOXES + Form */}
+            <motion.section id="istikhara" variants={containerVariants} initial="hidden" whileInView="visible" className="scroll-mt-32">
               <SectionHeader title="Divine" urduTitle="Counsel" icon={Sunrise} colorClass="text-gold" />
-              <div className="flex flex-col lg:flex-row gap-20 items-center">
-                <div className="lg:w-1/2 space-y-10">
-                  {NAV_ITEMS.find(n => n.label === 'Istikhara')?.children?.map((child, i) => (
-                    <DetailBlock 
-                      key={i}
-                      theme="gold"
-                      id={child.href}
-                      title={child.label}
-                      content={child.description}
-                      benefits={child.benefits}
-                    />
-                  ))}
-                </div>
-                <div className="lg:w-1/2 w-full">
-                  <IstikharaForm />
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+                {NAV_ITEMS.find(n => n.label === 'Istikhara')?.children?.map((child, i) => (
+                  <DetailBlock key={i} theme="gold" id={child.href} title={child.label} content={child.description} benefits={child.benefits} />
+                ))}
+              </div>
+              <div className="max-w-4xl mx-auto">
+                <IstikharaForm />
               </div>
             </motion.section>
 
-            {/* Content for Protection */}
-            <motion.section 
-              id="protection" 
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="scroll-mt-32"
-            >
+            {/* Protection Section: 4 BOXES */}
+            <motion.section id="protection" variants={containerVariants} initial="hidden" whileInView="visible" className="scroll-mt-32">
               <SectionHeader title="Sacred" urduTitle="Shields" icon={Shield} colorClass="text-charcoal" />
-              <div className="grid md:grid-cols-2 gap-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {NAV_ITEMS.find(n => n.label === 'Black Magic')?.children?.map((child, i) => (
-                  <DetailBlock 
-                    key={i}
-                    theme="emerald"
-                    id={child.href}
-                    title={child.label}
-                    content={child.description}
-                    benefits={child.benefits}
-                  />
+                  <DetailBlock key={i} theme="emerald" id={child.href} title={child.label} content={child.description} benefits={child.benefits} />
                 ))}
               </div>
             </motion.section>
@@ -478,36 +435,103 @@ const App: React.FC = () => {
           <DuaCard />
           <TasbeehCounter />
 
-          <footer id="contact" className="relative pt-60 pb-20 z-10 bg-black border-t-2 border-gold/40">
-            <div className="container mx-auto px-10 text-center relative z-10">
-              <BismillahSVG />
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-24 mt-32 text-left">
-                <div className="space-y-8">
-                  <h3 className="text-4xl font-serif font-bold gold-gradient-text">نور الہدیٰ</h3>
-                  <p className="text-ivory/50 text-lg font-serif italic">"Andheron se nikal kar dilon ko sukoon aur hidayat ki taraf le jana humara mission hai."</p>
-                  <div className="flex space-x-6">
-                    {[Instagram, Facebook, Twitter].map((I, i) => <a key={i} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center bg-white/5"><I size={18} /></a>)}
-                  </div>
-                </div>
-                <div className="space-y-6">
-                  <h4 className="text-gold uppercase tracking-[0.5em] text-[10px] font-black">Sacred Links</h4>
-                  <ul className="space-y-4 text-ivory/50 font-bold uppercase text-[9px] tracking-[0.3em]">
-                    <li><a href="#about" onClick={(e) => scrollToId(e, '#about')}>About Us</a></li>
-                    <li><a href="#marriage" onClick={(e) => scrollToId(e, '#marriage')}>Marriage Success</a></li>
-                    <li><a href="#family" onClick={(e) => scrollToId(e, '#family')}>Family Harmony</a></li>
-                    <li><a href="#istikhara" onClick={(e) => scrollToId(e, '#istikhara')}>Istikhara Service</a></li>
+          {/* SACRED PREMIUM FOOTER */}
+          <footer id="contact" className="relative pt-32 pb-16 z-10 bg-emerald border-t border-gold/40">
+            <div className="container mx-auto px-8 max-w-7xl relative z-10">
+              {/* Spiritual Header */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-center mb-24 space-y-8"
+              >
+                <h3 className="text-5xl md:text-7xl font-serif font-bold text-gold premium-heading arabic-font" dir="rtl">
+                  أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ
+                </h3>
+                <p className="text-ivory/80 text-2xl md:text-3xl urdu-font italic" dir="rtl">
+                  Beshak Allah ki yaad hi mein dilon ka sukoon hai
+                </p>
+                <div className="w-32 h-[1px] bg-gold/30 mx-auto mt-10" />
+              </motion.div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-32 mb-24">
+                {/* Column 1: Services (Urdu) */}
+                <div className="space-y-10">
+                  <h4 className="text-gold uppercase tracking-[0.5em] text-xs font-black border-b border-gold/10 pb-5 inline-block">Sacred Services</h4>
+                  <ul className="space-y-6 urdu-font text-ivory/70 text-xl" dir="rtl">
+                    <li><a href="#istikhara" onClick={(e) => scrollToId(e, '#istikhara')} className="hover:text-gold transition-colors duration-300">استخارہ</a></li>
+                    <li><a href="#shifa" onClick={(e) => scrollToId(e, '#shifa')} className="hover:text-gold transition-colors duration-300">روحانی شفا</a></li>
+                    <li><a href="#pasand" onClick={(e) => scrollToId(e, '#pasand')} className="hover:text-gold transition-colors duration-300">پسند کی شادی</a></li>
+                    <li><a href="#family" onClick={(e) => scrollToId(e, '#family')} className="hover:text-gold transition-colors duration-300">خاندانی مسائل</a></li>
                   </ul>
                 </div>
-                <div className="space-y-8">
-                  <h4 className="text-gold uppercase tracking-[0.5em] text-[10px] font-black">Direct Access</h4>
-                  <button onClick={() => window.open('https://wa.me/923057615767', '_blank')} className="w-full bg-forest text-white py-6 rounded-2xl font-black uppercase tracking-[0.4em] text-[10px] mirror-button flex items-center justify-center space-x-4">
-                    <MessageCircle size={20} />
-                    <span>WHATSAPP GUIDANCE</span>
-                  </button>
-                  <button onClick={(e) => scrollToId(e, '#')} className="flex items-center space-x-4 text-gold/60 hover:text-gold transition-all text-[10px] font-black uppercase tracking-[0.6em]">
-                    <span>RETURN TO LIGHT</span>
-                    <ArrowUp size={16} />
-                  </button>
+
+                {/* Column 2: Quick Navigation */}
+                <div className="space-y-10">
+                  <h4 className="text-gold uppercase tracking-[0.5em] text-xs font-black border-b border-gold/10 pb-5 inline-block">Quick Access</h4>
+                  <ul className="space-y-6 text-ivory/70 font-bold uppercase text-sm tracking-[0.2em]">
+                    <li><a href="#" onClick={(e) => scrollToId(e, '#')} className="hover:text-gold transition-colors duration-300">Home Path</a></li>
+                    <li><a href="#about" onClick={(e) => scrollToId(e, '#about')} className="hover:text-gold transition-colors duration-300">Sacred Legacy</a></li>
+                    <li><a href="#contact" onClick={(e) => scrollToId(e, '#contact')} className="hover:text-gold transition-colors duration-300">Contact Center</a></li>
+                    <li><a href="#" className="hover:text-gold transition-colors duration-300">Spiritual Blog</a></li>
+                  </ul>
+                </div>
+
+                {/* Column 3: Contact Info */}
+                <div className="space-y-12">
+                  <h4 className="text-gold uppercase tracking-[0.5em] text-xs font-black border-b border-gold/10 pb-5 inline-block">Contact Info</h4>
+                  <div className="space-y-8">
+                    <a href="https://wa.me/923057615767" target="_blank" className="flex items-center space-x-5 group">
+                      <div className="w-14 h-14 rounded-2xl bg-gold/5 flex items-center justify-center border border-gold/20 text-gold group-hover:bg-gold group-hover:text-charcoal transition-all duration-500 shadow-lg">
+                        <MessageCircle size={24} />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-[10px] uppercase tracking-widest text-gold/40 mb-1">WhatsApp Guidance</span>
+                        <span className="text-ivory/90 font-bold tracking-widest text-base">+92 305 7615767</span>
+                      </div>
+                    </a>
+                    <a href="mailto:guidance@nurulhuda.com" className="flex items-center space-x-5 group">
+                      <div className="w-14 h-14 rounded-2xl bg-gold/5 flex items-center justify-center border border-gold/20 text-gold group-hover:bg-gold group-hover:text-charcoal transition-all duration-500 shadow-lg">
+                        <Mail size={24} />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-[10px] uppercase tracking-widest text-gold/40 mb-1">Direct Email</span>
+                        <span className="text-ivory/90 font-bold tracking-widest text-base">guidance@nurulhuda.com</span>
+                      </div>
+                    </a>
+                  </div>
+                  <div className="flex items-center space-x-8 pt-6 opacity-60">
+                    <Facebook size={22} className="hover:text-gold cursor-pointer transition-all hover:scale-110" />
+                    <Twitter size={22} className="hover:text-gold cursor-pointer transition-all hover:scale-110" />
+                    <Instagram size={22} className="hover:text-gold cursor-pointer transition-all hover:scale-110" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Bar (Barakat) */}
+              <div className="pt-16 border-t border-gold/10 flex flex-col md:flex-row items-center justify-between gap-10 text-center md:text-left">
+                <div className="text-xs font-bold uppercase tracking-[0.4em] text-gold/60 leading-relaxed">
+                  Allah ki rehmat aur barakat ke sath — <span className="text-ivory font-black">Nur-ul-Huda 2026</span>
+                </div>
+                <button 
+                  onClick={(e) => scrollToId(e, '#')}
+                  className="group flex items-center space-x-4 text-gold/40 hover:text-gold transition-all text-xs font-black uppercase tracking-[0.5em]"
+                >
+                  <span>RETURN TO LIGHT</span>
+                  <div className="w-10 h-10 rounded-full border border-gold/20 flex items-center justify-center group-hover:bg-gold/10 transition-colors">
+                    <ArrowUp size={18} />
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Mirror Reflection Edge */}
+            <div className="reflection-mask h-32 w-full absolute bottom-0 left-0 opacity-10 pointer-events-none overflow-hidden rotate-180">
+              <div className="container mx-auto px-8 max-w-7xl h-full flex flex-col justify-end">
+                <div className="w-full h-[2px] bg-gold/20 mb-6" />
+                <div className="flex justify-between items-center opacity-40">
+                  <div className="w-48 h-3 bg-gold/10 rounded-full" />
+                  <div className="w-24 h-3 bg-gold/10 rounded-full" />
                 </div>
               </div>
             </div>

@@ -7,6 +7,9 @@
   <title>Nur-ul-Huda | Sacred Spiritual Excellence</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Professional Urdu Font CDN -->
+  <link href="https://cdn.jsdelivr.net/gh/m-fraz-abbasi/Jameel-Noori-Nastaleeq-CDN/style.css" rel="stylesheet">
+  
   <script>
     tailwind.config = {
       theme: {
@@ -25,6 +28,7 @@
             sans: ['Inter', 'sans-serif'],
             serif: ['Amiri', 'serif'],
             kufi: ['Reem Kufi', 'sans-serif'],
+            urdu: ['"Jameel Noori Nastaleeq"', 'serif'],
           },
           animation: {
             'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -72,6 +76,21 @@
     
     html {
       scroll-behavior: smooth;
+    }
+
+    .urdu-font {
+      font-family: "Jameel Noori Nastaleeq", serif;
+      direction: rtl;
+      line-height: 2;
+    }
+
+    .arabic-font {
+      font-family: 'Amiri', serif;
+      direction: rtl;
+    }
+
+    .premium-heading {
+      text-shadow: 0 4px 15px rgba(197, 160, 89, 0.6);
     }
 
     /* Marble Reflection Mask */

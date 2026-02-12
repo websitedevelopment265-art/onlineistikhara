@@ -30,19 +30,19 @@ export const NAV_ITEMS: NavItem[] = [
       { 
         label: 'Dua for Marriage', 
         href: '#dua-marriage',
-        description: 'Quranic wazaif for mutual love and relationship bonding to bring hearts closer together in a halal manner. Wazaif that instill loyalty and affection.',
+        description: 'Quranic wazaif for mutual love and relationship bonding to bring hearts closer together in a halal manner.',
         benefits: ['Increase in Muhabbat', 'Proposal Acceptance', 'Azdawaji Sukun']
       },
       { 
         label: 'Breakup Recovery', 
         href: '#breakup',
-        description: 'Toote hue rishton ko jorne aur na-chaqi door karne ke liye roohani rehnumai aur sabr. Healing emotional wounds through divine remembrance.',
+        description: 'Toote hue rishton ko jorne aur na-chaqi door karne ke liye roohani rehnumai aur sabr. Healing emotional wounds.',
         benefits: ['Emotional Healing', 'Sabr & Strength', 'Relationship Restore']
       },
       { 
         label: 'Manpasand Shadi', 
         href: '#manpasand',
-        description: 'Seeking the path of happiness with your chosen partner under divine guidance. We help navigate the social and spiritual hurdles of your union.',
+        description: 'Seeking the path of happiness with your chosen partner under divine guidance. Navigating social and spiritual hurdles.',
         benefits: ['Social Acceptance', 'Marital Harmony', 'Divine Protection']
       }
     ]
@@ -57,20 +57,26 @@ export const NAV_ITEMS: NavItem[] = [
       { 
         label: 'Divorce Problem', 
         href: '#divorce',
-        description: 'Talaq jaise sakht faisle se bachne aur ghar ko dobara abad karne ke liye azmooda wazaif. Healing broken ties and softening hardened hearts.',
+        description: 'Talaq jaise sakht faisle se bachne aur ghar ko dobara abad karne ke liye azmooda wazaif.',
         benefits: ['Stopping Divorce', 'Evil Eye Protection', 'Heart Softening']
       },
       { 
         label: 'No Child Issue', 
         href: '#aulad',
-        description: 'Aulad ki naimat se mehroom joron ke liye Quranic Shifa aur khas roohani ilaj. Seeking the miracle of birth through the Dua of Zakariya (AS).',
+        description: 'Aulad ki naimat se mehroom joron ke liye Quranic Shifa aur khas roohani ilaj. Seeking the miracle of birth.',
         benefits: ['Dua of Zakariya (AS)', 'Bandish Removal', 'Healthy Offspring']
       },
       { 
         label: 'Conflict Resolution', 
         href: '#harmony',
-        description: 'Ghar ke roz marrah ke jhagray aur sakhti khatam kar ke aman-o-aman paida karna. Bringing Rahma back to the family dinner table.',
+        description: 'Ghar ke roz marrah ke jhagray aur sakhti khatam kar ke aman-o-aman paida karna.',
         benefits: ['Peace at Home', 'Financial Barakah', 'Mutual Respect']
+      },
+      { 
+        label: 'Gharloo Sukun', 
+        href: '#domestic-peace',
+        description: 'Ghar mein barkat aur apas ki muhabbat ko barhane ke liye khas Quranic rehnumai aur wazaif.',
+        benefits: ['Home Barakah', 'Stress Relief', 'Family Bonding']
       }
     ]
   },
@@ -84,20 +90,26 @@ export const NAV_ITEMS: NavItem[] = [
       { 
         label: 'Business Istikhara', 
         href: '#business-istikhara',
-        description: 'Karobar mein barkat aur naye projects ke liye Allah se mashwara aur behtari ki dua. Ensuring your investments are backed by divine approval.',
+        description: 'Karobar mein barkat aur naye projects ke liye Allah se mashwara aur behtari ki dua.',
         benefits: ['Loss Prevention', 'Strategic Clarity', 'Divine Approval']
       },
       { 
         label: 'Travel & Decisions', 
         href: '#travel-istikhara',
-        description: 'Safar ki kamyabi aur hifazat ke liye istikhara taake safar ba-khair-o-afiyat ho. Guidance for migrations, relocation, and life-changing choices.',
+        description: 'Safar ki kamyabi aur hifazat ke liye istikhara taake safar ba-khair-o-afiyat ho.',
         benefits: ['Travel Safety', 'Purpose Success', 'Peace of Mind']
       },
       { 
         label: 'Roohani Mashwara', 
         href: '#life-decisions',
-        description: 'Zindagi ke ahem faislo mein ghalati se bachne ke liye masnoon istikhara and spiritual consultation for clarity of soul.',
+        description: 'Zindagi ke ahem faislo mein ghalati se bachne ke liye masnoon istikhara and spiritual consultation.',
         benefits: ['Regret Prevention', 'Confidence in Choice', 'Spiritual Backing']
+      },
+      { 
+        label: 'Marriage Istikhara', 
+        href: '#marriage-istikhara',
+        description: 'Naye rishte ya shadi ke faisle se pehle Allah ki marzi maloom karne ka masnoon tariqa.',
+        benefits: ['Right Partner', 'Future Clarity', 'Marital Success']
       }
     ]
   },
@@ -111,20 +123,26 @@ export const NAV_ITEMS: NavItem[] = [
       { 
         label: 'Kala Jadu Removal', 
         href: '#magic-removal',
-        description: 'Sifli ilm aur har qism ke kale jadu ka Quran-e-Pak ki ayats se mukammal khatma. Pure spiritual cleansing from negative energy.',
+        description: 'Sifli ilm aur har qism ke kale jadu ka Quran-e-Pak ki ayats se mukammal khatma.',
         benefits: ['Immediate Relief', 'Permanent Protection', 'Negative Energy Purge']
       },
       { 
         label: 'Nazar-e-Bad', 
         href: '#evil-eye',
-        description: 'Hasid ki nazar aur buri quwwato se hifazat ke liye Quranic Shifa aur hifazati azkar. Protecting your health and children from envy.',
+        description: 'Hasid ki nazar aur buri quwwato se hifazat ke liye Quranic Shifa aur hifazati azkar.',
         benefits: ['Daily Protection', 'Health Restoration', 'Shielding for Kids']
       },
       { 
         label: 'Bandish ka Khatma', 
         href: '#bandish',
-        description: 'Karobar, shadi aur sehat mein har kism ki bandish ka roohani torh. Opening the closed doors of Rizq and opportunity.',
+        description: 'Karobar, shadi aur sehat mein har kism ki bandish ka roohani torh.',
         benefits: ['Path Opening', 'Success Multiplier', 'Psychological Peace']
+      },
+      { 
+        label: 'Hifazati Hisar', 
+        href: '#spiritual-shield',
+        description: 'Apne ghar aur karobar ko hamesha ke liye buri quwwaton se mehfooz rakhne ka khas roohani ilaj.',
+        benefits: ['House Shielding', 'Enemy Protection', 'Long-term Safety']
       }
     ]
   },

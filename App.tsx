@@ -161,7 +161,7 @@ const DetailBlock: React.FC<{
         <div className="absolute -top-12 -right-12 w-32 h-32 bg-gold/5 blur-[50px] group-hover:bg-gold/10 transition-colors" />
         
         <h4 className={`text-3xl font-serif font-bold mb-6 transition-colors ${current.text} premium-heading uppercase tracking-tighter`}>{title}</h4>
-        <p className="text-ivory/90 mb-8 leading-[2.2] urdu-font text-2xl md:text-3xl overflow-hidden" dir="rtl">{content}</p>
+        {content && <p className="text-ivory/90 mb-8 leading-[2.2] urdu-font text-2xl md:text-3xl overflow-hidden" dir="rtl">{content}</p>}
         
         <button onClick={() => window.open('https://wa.me/923057615767', '_blank')} className={`flex items-center space-x-4 font-black text-[10px] uppercase tracking-[0.4em] transition-all hover:translate-x-3 text-gold`}>
           <span>Request Guidance</span>
@@ -345,10 +345,10 @@ const App: React.FC = () => {
               <div className="container mx-auto px-8 max-w-[90rem]">
                 <SectionHeader title="Love &" urduTitle="Marriage" icon={Heart} colorClass="text-rose-400" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                  <DetailBlock theme="gold" id="#pasand" title="Pasand ki Shadi" content="Shari hudood mein rehte hue pasand ki shadi ki rukawaton ko door karne ka hal." />
-                  <DetailBlock theme="amber" id="#dua-marriage" title="Dua for Marriage" content="Naye rishton ki talash aur mangni ke baad toot jane wale rishton ke liye makhsoos duain." />
-                  <DetailBlock theme="royal" id="#breakup" title="Breakup Recovery" content="Toote hue rishton ko jorne aur na-chaqi door karne ke liye roohani rehnumai." />
-                  <DetailBlock theme="gold" id="#manpasand" title="Manpasand Shadi" content="Seeking the path of happiness with your chosen partner via divine wazaif." />
+                  <DetailBlock theme="gold" id="#pasand" title="Pasand ki Shadi" content="" />
+                  <DetailBlock theme="amber" id="#dua-marriage" title="Dua for Marriage" content="" />
+                  <DetailBlock theme="royal" id="#breakup" title="Breakup Recovery" content="" />
+                  <DetailBlock theme="gold" id="#manpasand" title="Manpasand Shadi" content="" />
                 </div>
               </div>
             </section>
@@ -357,10 +357,10 @@ const App: React.FC = () => {
               <div className="container mx-auto px-8 max-w-[90rem]">
                 <SectionHeader title="Family" urduTitle="Harmony" icon={Home} colorClass="text-emerald-400" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                  <DetailBlock theme="emerald" id="#divorce" title="Divorce Problem" content="Gharloo na-chaqi aur talaq jaise masail ka Quran-o-Sunnah ki roshni mein mustanad hal." />
-                  <DetailBlock theme="gold" id="#aulad" title="No Child Issue" content="Aulaad ki nemat se mehroom joron ke liye khas roohani wazaif aur masnoon duain." />
-                  <DetailBlock theme="amber" id="#harmony" title="Conflict Resolution" content="Ghar ke roz marrah ke jhagray aur sakhti khatam karne ke liye roohani asar." />
-                  <DetailBlock theme="emerald" id="#domestic-peace" title="Gharloo Sukun" content="Ghar mein barkat aur apas ki muhabbat ko barhane ke liye roohani hisar." />
+                  <DetailBlock theme="emerald" id="#divorce" title="Divorce Problem" content="" />
+                  <DetailBlock theme="gold" id="#aulad" title="No Child Issue" content="" />
+                  <DetailBlock theme="amber" id="#harmony" title="Conflict Resolution" content="" />
+                  <DetailBlock theme="emerald" id="#domestic-peace" title="Gharloo Sukun" content="" />
                 </div>
               </div>
             </section>
@@ -369,10 +369,10 @@ const App: React.FC = () => {
               <div className="container mx-auto px-8 max-w-[90rem]">
                 <SectionHeader title="Divine" urduTitle="Istikhara" icon={Sparkles} colorClass="text-gold" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                  <DetailBlock theme="gold" id="#business-istikhara" title="Business Growth" content="Naye karobar ya sarmaya kari se pehle Allah ki hidayat maloom karne ka roohani tariqa." />
-                  <DetailBlock theme="amber" id="#travel-istikhara" title="Travel Hifazat" content="Safar ki kamyabi aur hifazat ke liye khas masnoon istikhara." />
-                  <DetailBlock theme="royal" id="#life-decisions" title="Roohani Mashwara" content="Zindagi ke ahem faislo mein ghalati se bachne ke liye Quranic rasta." />
-                  <DetailBlock theme="gold" id="#marriage-istikhara" title="Marriage Clarity" content="Rishtey ki bandish aur sahi shareek-e-hayat ke intekhab ke liye Istikhara." />
+                  <DetailBlock theme="gold" id="#business-istikhara" title="Business Growth" content="" />
+                  <DetailBlock theme="amber" id="#travel-istikhara" title="Travel Hifazat" content="" />
+                  <DetailBlock theme="royal" id="#life-decisions" title="Roohani Mashwara" content="" />
+                  <DetailBlock theme="gold" id="#marriage-istikhara" title="Marriage Clarity" content="" />
                 </div>
               </div>
             </section>
@@ -381,10 +381,10 @@ const App: React.FC = () => {
               <div className="container mx-auto px-8 max-w-[90rem]">
                 <SectionHeader title="Spiritual" urduTitle="Protection" icon={Shield} colorClass="text-emerald-500" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                  <DetailBlock theme="emerald" id="#magic-removal" title="Magic Removal" content="Har qism ke purane jadu, sifli amliyat aur bandishon ka mukammal Quranic ilaaj." />
-                  <DetailBlock theme="amber" id="#evil-eye" title="Nazar-e-Bad" content="Hasideen ki nazar aur dushmanon ke shar se hifazat ka hisar." />
-                  <DetailBlock theme="gold" id="#bandish" title="Bandish Removal" content="Karobar, shadi aur sehat mein har kism ki bandish ka roohani torh." />
-                  <DetailBlock theme="emerald" id="#spiritual-shield" title="Hifazati Hisar" content="Apne ghar aur karobar ko hamesha ke liye roohani tor par mehfooz rakhein." />
+                  <DetailBlock theme="emerald" id="#magic-removal" title="Magic Removal" content="" />
+                  <DetailBlock theme="amber" id="#evil-eye" title="Nazar-e-Bad" content="" />
+                  <DetailBlock theme="gold" id="#bandish" title="Bandish Removal" content="" />
+                  <DetailBlock theme="emerald" id="#spiritual-shield" title="Hifazati Hisar" content="" />
                 </div>
               </div>
             </section>

@@ -22,7 +22,7 @@ export const NAV_ITEMS: NavItem[] = [
       { 
         label: 'Pasand ki Shadi', 
         href: '#pasand',
-        description: 'Allah ki madad se rishton ki rukawaton ko khatam karein.',
+        description: 'Shari hudood mein rehte hue pasand ki shadi ki rukawaton ko door karne ka hal.',
         benefits: ['PARENTAL CONSENT DUA', 'REMOVAL OF BANDISH']
       },
       { 
@@ -53,14 +53,14 @@ export const NAV_ITEMS: NavItem[] = [
       { 
         label: 'Divorce Problem', 
         href: '#divorce',
-        description: 'Talaq jaise sakht faisle se bachne ke liye azmooda wazaif.',
-        benefits: ['STOPPING DIVORCE', 'EVIL EYE PROTECTION']
+        description: 'Gharloo na-chaqi aur talaq jaise masail ka Quran-o-Sunnah ki roshni mein mustanad hal.',
+        benefits: ['STOP DIVORCE', 'RESTORE HAPPINESS']
       },
       { 
         label: 'No Child Issue', 
         href: '#aulad',
-        description: 'Aulad ki naimat se mehroom joron ke liye Quranic Shifa.',
-        benefits: ['DUA OF ZAKARIYA (AS)', 'BANDISH REMOVAL']
+        description: 'Aulaad ki nemat se mehroom joron ke liye khas roohani wazaif aur masnoon duain.',
+        benefits: ['FERTILITY DUA', 'SPIRITUAL HEALING']
       },
       { 
         label: 'Conflict Resolution', 
@@ -84,8 +84,14 @@ export const NAV_ITEMS: NavItem[] = [
       { 
         label: 'Business Istikhara', 
         href: '#business-istikhara',
-        description: 'Karobar mein barkat aur naye projects ke liye Allah se mashwara.',
-        benefits: ['LOSS PREVENTION', 'STRATEGIC CLARITY']
+        description: 'Naye karobar ya sarmaya kari se pehle Allah ki hidayat maloom karne ka roohani tariqa.',
+        benefits: ['BARAKAH', 'DIVINE GUIDANCE']
+      },
+      { 
+        label: 'Marriage Istikhara', 
+        href: '#marriage-istikhara',
+        description: 'Rishtey ki bandish aur sahi shareek-e-hayat ke intekhab ke liye Istikhara.',
+        benefits: ['RIGHT CHOICE', 'CLARITY']
       },
       { 
         label: 'Travel & Decisions', 
@@ -98,12 +104,6 @@ export const NAV_ITEMS: NavItem[] = [
         href: '#life-decisions',
         description: 'Zindagi ke ahem faislo mein ghalati se bachne ke liye.',
         benefits: ['REGRET PREVENTION', 'CONFIDENCE IN CHOICE']
-      },
-      { 
-        label: 'Marriage Istikhara', 
-        href: '#marriage-istikhara',
-        description: 'Naye rishte ya shadi ke faisle se pehle Allah ki marzi.',
-        benefits: ['RIGHT PARTNER', 'FUTURE CLARITY']
       }
     ]
   },
@@ -115,14 +115,14 @@ export const NAV_ITEMS: NavItem[] = [
       { 
         label: 'Kala Jadu Removal', 
         href: '#magic-removal',
-        description: 'Sifli ilm aur har qism ke kale jadu ka mukammal khatma.',
-        benefits: ['IMMEDIATE RELIEF', 'PERMANENT PROTECTION']
+        description: 'Har qism ke purane jadu, sifli amliyat aur bandishon ka mukammal Quranic ilaaj.',
+        benefits: ['COMPLETE REMOVAL', 'PROTECTION']
       },
       { 
         label: 'Nazar-e-Bad', 
         href: '#evil-eye',
-        description: 'Hasid ki nazar aur buri quwwato se hifazat.',
-        benefits: ['DAILY PROTECTION', 'HEALTH RESTORATION']
+        description: 'Hasideen ki nazar aur dushmanon ke shar se hifazat ka hisar.',
+        benefits: ['EVIL EYE SHIELD', 'SAFETY']
       },
       { 
         label: 'Bandish ka Khatma', 

@@ -23,7 +23,8 @@ import {
   Settings,
   PhoneCall,
   Search,
-  CheckCircle2
+  CheckCircle2,
+  MapPin
 } from 'lucide-react';
 import { NAV_ITEMS } from './constants.ts';
 import ParticleBackground from './components/ParticleBackground.tsx';
@@ -37,7 +38,6 @@ import AboutSection from './components/AboutSection.tsx';
 import AdminLogin from './components/AdminLogin.tsx';
 import AdminDashboard from './components/AdminDashboard.tsx';
 import CookieBanner from './components/CookieBanner.tsx';
-import CustomCursor from './components/CustomCursor.tsx';
 
 // --- ANIMATION VARIANTS ---
 const containerVariants = {
@@ -205,7 +205,6 @@ const App: React.FC = () => {
 
   return (
     <AnimatePresence>
-      <CustomCursor />
       <ParticleBackground />
       {isLoading ? (
         <motion.div key="loader" exit={{ opacity: 0, scale: 1.15 }} className="fixed inset-0 z-[1000] bg-charcoal flex flex-col items-center justify-center overflow-hidden px-6">
@@ -346,7 +345,7 @@ const App: React.FC = () => {
               <div className="container mx-auto px-8 max-w-[90rem]">
                 <SectionHeader title="Love &" urduTitle="Marriage" icon={Heart} colorClass="text-rose-400" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                  <DetailBlock theme="gold" id="#pasand" title="Pasand ki Shadi" content="Mohabbat ki shadi mein aanay wali har qism ki rukawat aur bandish ka Quran-o-Sunnah ki roshni mein hal." />
+                  <DetailBlock theme="gold" id="#pasand" title="Pasand ki Shadi" content="Shari hudood mein rehte hue pasand ki shadi ki rukawaton ko door karne ka hal." />
                   <DetailBlock theme="amber" id="#dua-marriage" title="Dua for Marriage" content="Naye rishton ki talash aur mangni ke baad toot jane wale rishton ke liye makhsoos duain." />
                   <DetailBlock theme="royal" id="#breakup" title="Breakup Recovery" content="Toote hue rishton ko jorne aur na-chaqi door karne ke liye roohani rehnumai." />
                   <DetailBlock theme="gold" id="#manpasand" title="Manpasand Shadi" content="Seeking the path of happiness with your chosen partner via divine wazaif." />
@@ -358,8 +357,8 @@ const App: React.FC = () => {
               <div className="container mx-auto px-8 max-w-[90rem]">
                 <SectionHeader title="Family" urduTitle="Harmony" icon={Home} colorClass="text-emerald-400" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                  <DetailBlock theme="emerald" id="#divorce" title="Divorce Problem" content="Talaq jaise sakht faisle se bachne ke liye azmooda Quranic wazaif." />
-                  <DetailBlock theme="gold" id="#aulad" title="No Child Issue" content="Aulad ki naimat se mehroom joron ke liye khas roohani ilaj aur shifa." />
+                  <DetailBlock theme="emerald" id="#divorce" title="Divorce Problem" content="Gharloo na-chaqi aur talaq jaise masail ka Quran-o-Sunnah ki roshni mein mustanad hal." />
+                  <DetailBlock theme="gold" id="#aulad" title="No Child Issue" content="Aulaad ki nemat se mehroom joron ke liye khas roohani wazaif aur masnoon duain." />
                   <DetailBlock theme="amber" id="#harmony" title="Conflict Resolution" content="Ghar ke roz marrah ke jhagray aur sakhti khatam karne ke liye roohani asar." />
                   <DetailBlock theme="emerald" id="#domestic-peace" title="Gharloo Sukun" content="Ghar mein barkat aur apas ki muhabbat ko barhane ke liye roohani hisar." />
                 </div>
@@ -370,10 +369,10 @@ const App: React.FC = () => {
               <div className="container mx-auto px-8 max-w-[90rem]">
                 <SectionHeader title="Divine" urduTitle="Istikhara" icon={Sparkles} colorClass="text-gold" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                  <DetailBlock theme="gold" id="#business-istikhara" title="Business Growth" content="Karobar mein barkat aur naye projects ke liye Allah se mashwara." />
+                  <DetailBlock theme="gold" id="#business-istikhara" title="Business Growth" content="Naye karobar ya sarmaya kari se pehle Allah ki hidayat maloom karne ka roohani tariqa." />
                   <DetailBlock theme="amber" id="#travel-istikhara" title="Travel Hifazat" content="Safar ki kamyabi aur hifazat ke liye khas masnoon istikhara." />
                   <DetailBlock theme="royal" id="#life-decisions" title="Roohani Mashwara" content="Zindagi ke ahem faislo mein ghalati se bachne ke liye Quranic rasta." />
-                  <DetailBlock theme="gold" id="#marriage-istikhara" title="Marriage Clarity" content="Naye rishte ya shadi ke faisle se pehle Allah ki marzi maloom karein." />
+                  <DetailBlock theme="gold" id="#marriage-istikhara" title="Marriage Clarity" content="Rishtey ki bandish aur sahi shareek-e-hayat ke intekhab ke liye Istikhara." />
                 </div>
               </div>
             </section>
@@ -382,8 +381,8 @@ const App: React.FC = () => {
               <div className="container mx-auto px-8 max-w-[90rem]">
                 <SectionHeader title="Spiritual" urduTitle="Protection" icon={Shield} colorClass="text-emerald-500" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                  <DetailBlock theme="emerald" id="#magic-removal" title="Magic Removal" content="Sifli ilm aur har qism ke kale jadu ka mukammal Quranic khatma." />
-                  <DetailBlock theme="amber" id="#evil-eye" title="Nazar-e-Bad" content="Hasid ki nazar aur buri quwwato se hifazat ka roohani hisar." />
+                  <DetailBlock theme="emerald" id="#magic-removal" title="Magic Removal" content="Har qism ke purane jadu, sifli amliyat aur bandishon ka mukammal Quranic ilaaj." />
+                  <DetailBlock theme="amber" id="#evil-eye" title="Nazar-e-Bad" content="Hasideen ki nazar aur dushmanon ke shar se hifazat ka hisar." />
                   <DetailBlock theme="gold" id="#bandish" title="Bandish Removal" content="Karobar, shadi aur sehat mein har kism ki bandish ka roohani torh." />
                   <DetailBlock theme="emerald" id="#spiritual-shield" title="Hifazati Hisar" content="Apne ghar aur karobar ko hamesha ke liye roohani tor par mehfooz rakhein." />
                 </div>
@@ -397,32 +396,142 @@ const App: React.FC = () => {
             <DuaCard />
           </main>
 
-          <footer className="relative pt-40 pb-20 z-10 bg-forest border-t border-gold/20 overflow-hidden">
-            <div className="container mx-auto px-8 text-center">
-              <div className="mb-12 flex justify-center"><BismillahSVG /></div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20 text-left">
-                <div className="space-y-6">
-                  <h4 className="text-xl font-serif font-bold text-gold">Nur-ul-Huda</h4>
-                  <p className="text-ivory/40 text-sm leading-relaxed urdu-font" dir="rtl">ہماری خدمات صرف اور صرف انسانیت کی فلاح اور اللہ کی رضا کے لیے ہیں۔ قرآن و سنت کے مطابق حل تلاش کریں۔</p>
+          <footer className="relative pt-24 pb-12 z-10 bg-forest border-t border-gold/20 overflow-hidden text-left">
+            <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-5">
+              <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-gold blur-[150px] rounded-full" />
+              <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-emerald blur-[150px] rounded-full" />
+            </div>
+
+            <div className="container mx-auto px-8 relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+                
+                {/* Column 1: Brand & Intro */}
+                <div className="space-y-8">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-16 h-16 rounded-full bg-gold flex items-center justify-center shadow-[0_0_25px_rgba(197,160,89,0.3)] border-2 border-charcoal">
+                      <span className="text-charcoal font-black text-3xl">N</span>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                     <p className="text-gold arabic-font text-2xl leading-loose font-bold" dir="rtl">
+                      أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ
+                    </p>
+                    <p className="text-ivory/90 text-xl urdu-font leading-loose" dir="rtl">
+                       بیشک اللہ کی یاد میں دلوں کا سکون ہے۔
+                    </p>
+                  </div>
+                  
+                  <p className="text-ivory/70 text-lg leading-loose urdu-font pt-2 border-t border-gold/10" dir="rtl">
+                    نور الہدیٰ آپ کی روحانی اور جسمانی مشکلات کے حل کے لیے ایک مستند مرکز ہے۔
+                  </p>
                 </div>
-                <div className="space-y-6">
-                  <h4 className="text-xl font-serif font-bold text-gold">Quick Guidance</h4>
+
+                {/* Column 2: Quick Links */}
+                <div className="lg:pl-8">
+                  <div className="mb-8">
+                    <h4 className="text-2xl font-serif font-bold text-white urdu-font mb-1" dir="rtl">سریع رابطہ</h4>
+                    <p className="text-[9px] text-gold/60 font-black uppercase tracking-[0.2em]">Quick Links</p>
+                  </div>
                   <ul className="space-y-4">
-                    <li><a href="#about" onClick={(e) => scrollToId(e, '#about')} className="text-ivory/60 hover:text-gold transition-colors uppercase text-[10px] font-black tracking-widest">About Our Path</a></li>
-                    <li><a href="#marriage" onClick={(e) => scrollToId(e, '#marriage')} className="text-ivory/60 hover:text-gold transition-colors uppercase text-[10px] font-black tracking-widest">Marriage Wazaif</a></li>
-                    <li><a href="#istikhara" onClick={(e) => scrollToId(e, '#istikhara')} className="text-ivory/60 hover:text-gold transition-colors uppercase text-[10px] font-black tracking-widest">Online Istikhara</a></li>
+                    {[
+                      { label: 'Home', href: '#' },
+                      { label: 'About Us', href: '#about' },
+                      { label: 'Services', href: '#marriage' },
+                      { label: 'Contact', href: 'https://wa.me/923057615767' },
+                      { label: 'Blog', href: '#' }
+                    ].map((item) => (
+                      <li key={item.label}>
+                        <a href={item.href} onClick={(e) => { if (item.href.startsWith('#')) scrollToId(e, item.href) }} className="flex items-center justify-between text-ivory/70 hover:text-gold transition-colors group border-b border-gold/5 pb-2">
+                          <span className="text-[12px] font-bold uppercase tracking-[0.15em] group-hover:translate-x-2 transition-transform">{item.label}</span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-gold/40 group-hover:bg-gold group-hover:shadow-[0_0_10px_#c5a059] transition-all" />
+                        </a>
+                      </li>
+                    ))}
                   </ul>
                 </div>
-                <div className="space-y-6">
-                  <h4 className="text-xl font-serif font-bold text-gold">Connect With Us</h4>
-                  <div className="flex space-x-4">
-                    <button className="w-10 h-10 rounded-full border border-gold/20 flex items-center justify-center hover:bg-gold hover:text-charcoal transition-all"><Facebook size={18} /></button>
-                    <button className="w-10 h-10 rounded-full border border-gold/20 flex items-center justify-center hover:bg-gold hover:text-charcoal transition-all"><Instagram size={18} /></button>
-                    <button className="w-10 h-10 rounded-full border border-gold/20 flex items-center justify-center hover:bg-gold hover:text-charcoal transition-all"><Twitter size={18} /></button>
+
+                {/* Column 3: Services */}
+                <div>
+                   <div className="mb-8">
+                    <h4 className="text-2xl font-serif font-bold text-white urdu-font mb-1" dir="rtl">ہماری خدمات</h4>
+                    <p className="text-[9px] text-gold/60 font-black uppercase tracking-[0.2em]">Our Services</p>
+                  </div>
+                  <ul className="space-y-4">
+                    {[
+                      { label: 'Istikhara', href: '#istikhara' },
+                      { label: 'Kala Jadu Removal', href: '#magic-removal' },
+                      { label: 'Pasand ki Shadi', href: '#pasand' },
+                      { label: 'Roohani Shifa', href: '#protection' },
+                      { label: 'Gharloo Sukun', href: '#domestic-peace' }
+                    ].map((item) => (
+                      <li key={item.label}>
+                        <a href={item.href} onClick={(e) => scrollToId(e, item.href)} className="flex items-center justify-between text-ivory/70 hover:text-gold transition-colors group border-b border-gold/5 pb-2">
+                          <span className="text-[12px] font-bold uppercase tracking-[0.15em] group-hover:translate-x-2 transition-transform">{item.label}</span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-gold/40 group-hover:bg-gold group-hover:shadow-[0_0_10px_#c5a059] transition-all" />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Column 4: Contact */}
+                <div>
+                  <div className="mb-8">
+                    <h4 className="text-2xl font-serif font-bold text-white urdu-font mb-1" dir="rtl">رابطہ کریں</h4>
+                    <p className="text-[9px] text-gold/60 font-black uppercase tracking-[0.2em]">Contact Us</p>
+                  </div>
+                  <div className="space-y-6">
+                    <a href="https://wa.me/923057615767" className="group block">
+                      <div className="bg-white/5 p-5 rounded-3xl border border-gold/10 group-hover:border-gold/30 transition-all group-hover:bg-white/10 flex items-center space-x-4">
+                        <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-gold group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(197,160,89,0.2)]">
+                          <PhoneCall size={18} />
+                        </div>
+                        <div>
+                          <p className="text-[9px] font-black uppercase tracking-widest text-gold/50 mb-1">WhatsApp</p>
+                          <p className="text-ivory font-serif text-lg font-bold group-hover:text-gold transition-colors">+92 305 7615767</p>
+                        </div>
+                      </div>
+                    </a>
+                    
+                    <a href="mailto:help@nurulhuda.com" className="group block">
+                      <div className="bg-white/5 p-5 rounded-3xl border border-gold/10 group-hover:border-gold/30 transition-all group-hover:bg-white/10 flex items-center space-x-4">
+                        <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-gold group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(197,160,89,0.2)]">
+                          <Mail size={18} />
+                        </div>
+                        <div>
+                          <p className="text-[9px] font-black uppercase tracking-widest text-gold/50 mb-1">Email Address</p>
+                          <p className="text-ivory font-serif text-md font-bold group-hover:text-gold transition-colors">help@nurulhuda.com</p>
+                        </div>
+                      </div>
+                    </a>
+
+                    <div className="flex items-center gap-4 pt-4">
+                       {[Facebook, Instagram, Youtube].map((Icon, idx) => (
+                        <a 
+                          key={idx} 
+                          href="#" 
+                          className="w-12 h-12 rounded-full bg-charcoal border border-gold/20 flex items-center justify-center text-gold hover:text-charcoal hover:bg-gold transition-all duration-300 hover:scale-110 shadow-lg group"
+                        >
+                          <Icon size={20} className="group-hover:animate-pulse" />
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
+
               </div>
-              <p className="text-gold/40 text-[11px] font-black uppercase tracking-[0.5em]">Nur-ul-Huda 2026 — Allah ki Rehmat Se</p>
+
+              {/* Bottom Bar */}
+              <div className="pt-8 border-t border-gold/10 flex flex-col md:flex-row items-center justify-between gap-6">
+                <p className="text-gold/40 text-[10px] font-black uppercase tracking-[0.2em]">
+                  © 2026 Nur-ul-Huda - All Rights Reserved.
+                </p>
+                <div className="flex items-center space-x-6">
+                   <span className="text-[10px] font-bold text-gold/30 uppercase tracking-widest hover:text-gold cursor-pointer transition-colors">Privacy Policy</span>
+                   <span className="text-[10px] font-bold text-gold/30 uppercase tracking-widest hover:text-gold cursor-pointer transition-colors">Terms of Service</span>
+                </div>
+              </div>
             </div>
           </footer>
           <CookieBanner />

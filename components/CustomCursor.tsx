@@ -1,115 +1,99 @@
-import React, { useEffect, useState } from 'react';
-import { motion, useSpring, useMotionValue } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 
 const CustomCursor: React.FC = () => {
-  // Motion values for coordinates
-  const mouseX = useMotionValue(-100);
-  const mouseY = useMotionValue(-100);
-
-  // States for interaction
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [isClicking, setIsClicking] = useState(false);
-
-  // Spring Physics for the Core (Snappy)
-  const coreX = useSpring(mouseX, { damping: 20, stiffness: 800 });
-  const coreY = useSpring(mouseY, { damping: 20, stiffness: 800 });
-
-  // Spring Physics for the Outer Ring (Delayed/Fluid Lag)
-  const ringX = useSpring(mouseX, { damping: 30, stiffness: 100, mass: 1 });
-  const ringY = useSpring(mouseY, { damping: 30, stiffness: 100, mass: 1 });
 
   useEffect(() => {
-    const moveMouse = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
+    // Apply cursor: none to body only after custom cursor is active
+    const style = document.createElement('style');
+    style.innerHTML = `
+      * { cursor: none !important; }
+      @media (pointer: coarse) {
+        * { cursor: auto !important; }
+        .custom-cursor-container { display: none !important; }
+      }
+    `;
+    document.head.appendChild(style);
+
+    const onMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
       if (!isVisible) setIsVisible(true);
+
+      // Hardware accelerated movement using translate3d
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${clientX}px, ${clientY}px, 0)`;
+      }
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate3d(${clientX}px, ${clientY}px, 0)`;
+      }
     };
 
-    const handleMouseOver = (e: MouseEvent) => {
+    const handleHover = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      // Define what elements trigger the expanded state
-      const isInteractive = target.closest('button, a, .mirror-button, .glass, .magnetic-target, input, textarea, select');
+      // Detect all buttons, links, and interactive elements
+      const isInteractive = target.closest('button, a, input, select, textarea, .mirror-button, [role="button"]');
       setIsHovering(!!isInteractive);
     };
 
-    const handleMouseDown = () => setIsClicking(true);
-    const handleMouseUp = () => setIsClicking(false);
-    const handleMouseOut = () => setIsVisible(false);
-    const handleMouseEnter = () => setIsVisible(true);
+    const onMouseDown = () => {
+      if (ringRef.current) ringRef.current.style.scale = '0.8';
+    };
+    const onMouseUp = () => {
+      if (ringRef.current) ringRef.current.style.scale = isHovering ? '1.5' : '1';
+    };
 
-    window.addEventListener('mousemove', moveMouse);
-    window.addEventListener('mouseover', handleMouseOver);
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mouseleave', handleMouseOut);
-    document.addEventListener('mouseenter', handleMouseEnter);
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseover', handleHover);
+    window.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener('mouseenter', () => setIsVisible(true));
+    window.addEventListener('mouseleave', () => setIsVisible(false));
 
     return () => {
-      window.removeEventListener('mousemove', moveMouse);
-      window.removeEventListener('mouseover', handleMouseOver);
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mouseleave', handleMouseOut);
-      document.removeEventListener('mouseenter', handleMouseEnter);
+      document.head.removeChild(style);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseover', handleHover);
+      window.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mouseup', onMouseUp);
     };
-  }, [isVisible]);
-
-  if (!isVisible) return null;
+  }, [isHovering, isVisible]);
 
   return (
-    <div className="custom-cursor-wrapper fixed inset-0 pointer-events-none z-[99999] overflow-hidden">
-      
-      {/* 1. THE OUTER RING (AURA/HALO) */}
-      <motion.div
-        className="fixed top-0 left-0 rounded-full border-2 border-gold/40 pointer-events-none flex items-center justify-center"
+    <div 
+      className={`custom-cursor-container fixed inset-0 pointer-events-none z-[99999] transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+    >
+      {/* Outer Ring */}
+      <div
+        ref={ringRef}
+        className="fixed top-0 left-0 rounded-full border-2 pointer-events-none will-change-transform transition-all duration-300 ease-out"
         style={{
-          x: ringX,
-          y: ringY,
-          translateX: '-50%',
-          translateY: '-50%',
-          width: 44,
-          height: 44,
+          width: '40px',
+          height: '40px',
+          marginLeft: '-20px',
+          marginTop: '-20px',
+          borderColor: isHovering ? '#FFD700' : '#c5a059',
+          scale: isHovering ? '1.5' : '1',
+          backgroundColor: isHovering ? 'rgba(255, 215, 0, 0.1)' : 'transparent',
+          boxShadow: isHovering ? '0 0 20px rgba(255, 215, 0, 0.4)' : 'none',
         }}
-        animate={{
-          scale: isClicking ? 0.8 : (isHovering ? 1.8 : 1),
-          borderColor: isHovering ? 'rgba(212, 175, 55, 1)' : 'rgba(212, 175, 55, 0.4)',
-          backgroundColor: isHovering ? 'rgba(212, 175, 55, 0.05)' : 'rgba(0,0,0,0)',
-          boxShadow: isHovering 
-            ? '0 0 30px rgba(212, 175, 55, 0.4)' 
-            : '0 0 0px rgba(0,0,0,0)',
-        }}
-        transition={{ type: 'spring', damping: 20, stiffness: 200 }}
-      >
-        {/* Optional Inner Pulse Glow when hovering */}
-        {isHovering && (
-          <motion.div 
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 0.2, scale: 1.5 }}
-            className="absolute inset-0 bg-gold rounded-full blur-xl"
-          />
-        )}
-      </motion.div>
-
-      {/* 2. THE CORE (SOUL/POINTER) */}
-      <motion.div
-        className="fixed top-0 left-0 rounded-full pointer-events-none"
-        style={{
-          x: coreX,
-          y: coreY,
-          translateX: '-50%',
-          translateY: '-50%',
-          width: 8,
-          height: 8,
-          backgroundColor: '#D4AF37', // User specified Gold
-          boxShadow: '0 0 15px rgba(212, 175, 55, 0.8)',
-        }}
-        animate={{
-          scale: isClicking ? 1.5 : (isHovering ? 0.6 : 1),
-        }}
-        transition={{ type: 'spring', damping: 25, stiffness: 500 }}
       />
 
+      {/* Center Dot */}
+      <div
+        ref={dotRef}
+        className="fixed top-0 left-0 rounded-full pointer-events-none will-change-transform"
+        style={{
+          width: '6px',
+          height: '6px',
+          marginLeft: '-3px',
+          marginTop: '-3px',
+          backgroundColor: isHovering ? '#FFD700' : '#c5a059',
+          boxShadow: '0 0 10px rgba(197, 160, 89, 0.8)',
+        }}
+      />
     </div>
   );
 };

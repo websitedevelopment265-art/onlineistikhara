@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Lock, User, Sparkles } from 'lucide-react';
-import BismillahSVG from './BismillahSVG';
+import BismillahSVG from './BismillahSVG.tsx';
 
 interface AdminLoginProps {
   onLogin: (success: boolean) => void;

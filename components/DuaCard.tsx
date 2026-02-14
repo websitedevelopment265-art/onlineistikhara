@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Copy, Share2, RefreshCw, Quote, Check } from 'lucide-react';
+import { Copy, Share2, RefreshCw, Quote, Check, Heart } from 'lucide-react';
+import Toast from './Toast.tsx';
 
 const DUAS = [
   {
@@ -42,10 +43,13 @@ const DuaCard: React.FC = () => {
   const [index, setIndex] = useState(0);
   const [copied, setCopied] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [showToast, setShowToast] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const nextDua = useCallback(() => {
     setIndex(prev => (prev + 1) % DUAS.length);
     setProgress(0);
+    setIsFavorite(false);
   }, []);
 
   useEffect(() => {
@@ -70,6 +74,15 @@ const DuaCard: React.FC = () => {
     });
   };
 
+  const handleFavorite = () => {
+    if (!isFavorite) {
+      setShowToast(true);
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  };
+
   const shareDua = async () => {
     const shareData = {
       title: 'Daily Dua',
@@ -90,6 +103,12 @@ const DuaCard: React.FC = () => {
 
   return (
     <section id="dua-moment" className="container mx-auto px-8 py-24 scroll-mt-24">
+      <Toast 
+        show={showToast} 
+        message="آپکا انتخاب محفوظ کر لیا گیا ہے" 
+        onClose={() => setShowToast(false)} 
+      />
+      
       <motion.div 
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -151,6 +170,18 @@ const DuaCard: React.FC = () => {
           </AnimatePresence>
 
           <div className="flex flex-wrap items-center justify-center gap-6 pt-6">
+            <button 
+              onClick={handleFavorite}
+              className={`group flex items-center space-x-3 px-8 py-4 rounded-2xl border transition-all duration-500 text-[10px] font-black uppercase tracking-[0.3em] ${
+                isFavorite 
+                ? 'bg-rose-500/20 border-rose-500/50 text-rose-400' 
+                : 'bg-white/5 border-white/10 text-ivory/60 hover:bg-rose-500 hover:text-white hover:border-rose-500'
+              }`}
+            >
+              <Heart size={16} className={`${isFavorite ? 'fill-current' : ''} transition-all`} />
+              <span>{isFavorite ? 'Saved' : 'Save Path'}</span>
+            </button>
+
             <button 
               onClick={copyDua}
               className={`group flex items-center space-x-3 px-8 py-4 rounded-2xl border transition-all duration-500 text-[10px] font-black uppercase tracking-[0.3em] ${

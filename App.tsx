@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { 
   MessageCircle, 
   Sparkles, 
@@ -150,23 +150,65 @@ const DetailBlock: React.FC<{
   };
   const current = themes[theme] || themes.gold;
 
+  // 3D Tilt Logic
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
+  
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
   return (
-    <div className="relative group h-full">
+    <div 
+      className="relative group h-full" 
+      style={{ perspective: 1000 }}
+    >
       <motion.div 
         id={id.replace('#', '')} 
         variants={itemVariants}
-        whileHover={{ y: -10, scale: 1.02 }}
-        className={`scroll-mt-48 aspect-square p-10 md:p-12 rounded-[3rem] backdrop-blur-xl border-2 transition-all duration-700 relative overflow-hidden flex flex-col justify-center bg-white/[0.03] border-gold/10 hover:border-gold/30 hover:shadow-[0_40px_100px_rgba(197,160,89,0.15)]`}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d"
+        }}
+        className={`scroll-mt-48 aspect-square p-10 md:p-12 rounded-[3rem] backdrop-blur-xl border-2 transition-all duration-200 ease-out relative overflow-hidden flex flex-col justify-center bg-white/[0.03] border-gold/10 hover:border-gold/30 hover:shadow-[0_40px_100px_rgba(197,160,89,0.15)]`}
       >
-        <div className="absolute -top-12 -right-12 w-32 h-32 bg-gold/5 blur-[50px] group-hover:bg-gold/10 transition-colors" />
+        {/* Shimmer Effect */}
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-[3rem]">
+             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100 group-hover:animate-shimmer" />
+        </div>
+
+        <div className="absolute -top-12 -right-12 w-32 h-32 bg-gold/5 blur-[50px] group-hover:bg-gold/10 transition-colors pointer-events-none" style={{ transform: "translateZ(-20px)" }} />
         
-        <h4 className={`text-3xl font-serif font-bold mb-6 transition-colors ${current.text} premium-heading uppercase tracking-tighter`}>{title}</h4>
-        {content && <p className="text-ivory/90 mb-8 leading-[2.2] urdu-font text-2xl md:text-3xl overflow-hidden" dir="rtl">{content}</p>}
-        
-        <button onClick={() => window.open('https://wa.me/923057615767', '_blank')} className={`flex items-center space-x-4 font-black text-[10px] uppercase tracking-[0.4em] transition-all hover:translate-x-3 text-gold`}>
-          <span>Request Guidance</span>
-          <ArrowRight className="w-4 h-4" />
-        </button>
+        <div style={{ transform: "translateZ(20px)" }} className="relative z-10">
+            <h4 className={`text-3xl font-serif font-bold mb-6 transition-colors ${current.text} premium-heading uppercase tracking-tighter`}>{title}</h4>
+            {content && <p className="text-ivory/90 mb-8 leading-[2.2] urdu-font text-2xl md:text-3xl overflow-hidden" dir="rtl">{content}</p>}
+            
+            <button onClick={() => window.open('https://wa.me/923057615767', '_blank')} className={`flex items-center space-x-4 font-black text-[10px] uppercase tracking-[0.4em] transition-all hover:translate-x-3 text-gold`}>
+            <span>Request Guidance</span>
+            <ArrowRight className="w-4 h-4" />
+            </button>
+        </div>
       </motion.div>
     </div>
   );
